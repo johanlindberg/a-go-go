@@ -19,6 +19,13 @@ agogo.goban.initBoardSizes = function() {
 	opt.text = agogo.conf.boardSizes[i];
 	boardSize.add(opt);
     }
+
+    var f = function() {
+	var size = agogo.conf.boardSizes[boardSize.selectedIndex];
+	agogo.goban.makeBoard(size);
+    };
+
+    boardSize.onchange = f;
 };
 
 agogo.goban.makeBoard = function(size) {
