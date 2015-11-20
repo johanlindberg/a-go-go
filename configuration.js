@@ -5,6 +5,8 @@ if (!agogo) {
     agogo.conf = {};
 }
 
+agogo.conf.squareSize = 30;
+agogo.conf.boardSizes = [9];
 
 agogo.conf.colLabels = "ABCDEFGHJKLMNOPQRST";
 agogo.conf.getColLabel = function(col) {
