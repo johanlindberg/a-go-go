@@ -30,9 +30,29 @@ agogo.goban.initBoardSizes = function() {
 
 agogo.goban.makeBoard = function(size) {
     var canvas = document.getElementById('goban');
+    var s = agogo.conf.squareSize;
+    var m = 1.5 * s;
     if (canvas.getContext) {
 	var ctx = canvas.getContext('2d');
-	canvas.width = size * agogo.conf.squareSize;
-	canvas.height = size * agogo.conf.squareSize;
+
+	ctx.lineWidth = 2;
+	ctx.fillStyle = "black";
+
+	canvas.width = (2 + size) * s;
+	canvas.height = (2 + size) * s;
+
+	// draw the grid
+	for (var i = 0; i < size; i++) {
+	    // cols
+	    ctx.beginPath();
+	    ctx.moveTo(m + (s * i), m);
+	    ctx.lineTo(m + (s * i), m + (s * (size - 1)));
+	    ctx.stroke();
+	    // rows
+	    ctx.beginPath();
+	    ctx.moveTo(m, m + (s * i));
+	    ctx.lineTo(m + (s * (size - 1)), m + (s * i));
+	    ctx.stroke();
+	}
     }
 };
