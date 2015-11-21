@@ -7,7 +7,9 @@ if (!agogo) {
 
 agogo.goban.init = function() {
     agogo.goban.initBoardSizes();
-    agogo.goban.makeBoard(agogo.conf.boardSizes[0]);
+    var defaultSize = agogo.conf.boardSizes[0];
+    agogo.game.boardsize = defaultSize;
+    agogo.goban.makeBoard(defaultSize);
 };
 
 agogo.goban.initBoardSizes = function() {
@@ -22,6 +24,7 @@ agogo.goban.initBoardSizes = function() {
 
     var f = function() {
 	var size = agogo.conf.boardSizes[boardSize.selectedIndex];
+	agogo.game.boardsize = size;
 	agogo.goban.makeBoard(size);
     };
 
@@ -37,6 +40,8 @@ agogo.goban.makeBoard = function(size) {
 
 	ctx.lineWidth = 2;
 	ctx.fillStyle = "black";
+	ctx.font = "20px sans-serif";
+	ctx.textAlign = "center";
 
 	canvas.width = (2 + size) * s;
 	canvas.height = (2 + size) * s;
@@ -48,11 +53,16 @@ agogo.goban.makeBoard = function(size) {
 	    ctx.moveTo(m + (s * i), m);
 	    ctx.lineTo(m + (s * i), m + (s * (size - 1)));
 	    ctx.stroke();
+
+	    ctx.fillText(agogo.conf.getColLabel(i + 1), m + (s * i), m - s);
+
 	    // rows
 	    ctx.beginPath();
 	    ctx.moveTo(m, m + (s * i));
 	    ctx.lineTo(m + (s * (size - 1)), m + (s * i));
 	    ctx.stroke();
+
+	    ctx.fillText(agogo.conf.getRowLabel(i + 1), m - s, m + (s * i));
 	}
     }
 };
