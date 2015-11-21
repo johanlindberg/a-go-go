@@ -40,8 +40,8 @@ agogo.goban.makeBoard = function(size) {
 
 	ctx.lineWidth = 2;
 	ctx.fillStyle = "black";
+
 	ctx.font = "20px sans-serif";
-	ctx.textAlign = "center";
 
 	canvas.width = (2 + size) * s;
 	canvas.height = (2 + size) * s;
@@ -54,7 +54,10 @@ agogo.goban.makeBoard = function(size) {
 	    ctx.lineTo(m + (s * i), m + (s * (size - 1)));
 	    ctx.stroke();
 
-	    ctx.fillText(agogo.conf.getColLabel(i + 1), m + (s * i), m - s);
+	    var tm = ctx.measureText(agogo.conf.getColLabel(i + 1));
+	    ctx.fillText(agogo.conf.getColLabel(i + 1),
+			 m + (s * i) - Math.floor(tm.width / 2),
+			 m - s + 4);
 
 	    // rows
 	    ctx.beginPath();
@@ -62,7 +65,10 @@ agogo.goban.makeBoard = function(size) {
 	    ctx.lineTo(m + (s * (size - 1)), m + (s * i));
 	    ctx.stroke();
 
-	    ctx.fillText(agogo.conf.getRowLabel(i + 1), m - s, m + (s * i));
+	    tm = ctx.measureText(agogo.conf.getRowLabel(i + 1));
+	    ctx.fillText(agogo.conf.getRowLabel(i + 1),
+			 m - s - Math.floor(tm.width / 2),
+			 m + (s * i) + 4);
 	}
     }
 };
