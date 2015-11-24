@@ -34,7 +34,7 @@ agogo.goban.initBoardSizes = function() {
 agogo.goban.makeBoard = function(size) {
     var canvas = document.getElementById('goban');
     var s = agogo.conf.goban.gridSize;
-    var m = 1.5 * s;
+    var m = agogo.conf.goban.gridBorderWidth;
     if (canvas.getContext) {
 	var ctx = canvas.getContext('2d');
 
@@ -70,5 +70,25 @@ agogo.goban.makeBoard = function(size) {
 			 m - s - Math.floor(tm.width / 2),
 			 m + (s * i) + 4);
 	}
+    }
+};
+
+agogo.goban.placeStone = function(vertex, player) {
+    var canvas = document.getElementById('goban');
+    var s = agogo.conf.goban.gridSize;
+    var m = agogo.conf.goban.gridBorderWidth;
+    if (canvas.getContext) {
+	var ctx = canvas.getContext('2d');
+
+	ctx.lineWidth = agogo.conf.goban.stoneLineWidth;
+	ctx.fillStyle = agogo.conf.goban.stoneFillColor1;
+
+	var p = agogo.conf.goban.getPosition(vertex);
+
+	ctx.beginPath();
+	ctx.arc(m + (s * (p.c - 1)), m + (s * (p.r - 1)),
+		agogo.conf.goban.stoneSize,
+		0, 2 * Math.PI);
+	ctx.fill();
     }
 };

@@ -20,12 +20,17 @@ agogo.conf.game.availableRules      = ['AGA (Area)',
 // --------------------
 
 // Grid
-agogo.conf.goban.gridSize  = 30;
-agogo.conf.goban.gridColor = '#000000';
-agogo.conf.goban.gridWidth = 2;
+agogo.conf.goban.gridSize        = 30;
+agogo.conf.goban.gridColor       = '#000000';
+agogo.conf.goban.gridWidth       = 2;
+agogo.conf.goban.gridBorderWidth = 1.5 * agogo.conf.goban.gridSize;
 
 // Stones
-agogo.conf.goban.stoneSize = 26;
+agogo.conf.goban.stoneSize       = 14;
+agogo.conf.goban.stoneLineWidth  = 2;
+agogo.conf.goban.stoneLineColor  = '#000000';
+agogo.conf.goban.stoneFillColor1 = '#000000';
+agogo.conf.goban.stoneFillColor2 = '#ffffff';
 
 // Board
 agogo.conf.goban.backgroundColor = '#DDBC6B'
