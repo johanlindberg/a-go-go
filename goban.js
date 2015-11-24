@@ -7,7 +7,7 @@ if (!agogo) {
 
 agogo.goban.init = function() {
     agogo.goban.initBoardSizes();
-    var defaultSize = agogo.conf.boardSizes[0];
+    var defaultSize = agogo.conf.game.availableBoardSizes[0];
     agogo.game.boardsize = defaultSize;
     agogo.goban.makeBoard(defaultSize);
 };
@@ -15,15 +15,15 @@ agogo.goban.init = function() {
 agogo.goban.initBoardSizes = function() {
     var boardSize = document.getElementById('boardSize');
     var opt;
-    for (var i = 0; i < agogo.conf.boardSizes.length; i++) {
+    for (var i = 0; i < agogo.conf.game.availableBoardSizes.length; i++) {
 	opt = document.createElement('option');
-	opt.value = agogo.conf.boardSizes[i];
-	opt.text = agogo.conf.boardSizes[i];
+	opt.value = agogo.conf.game.availableBoardSizes[i];
+	opt.text = agogo.conf.game.availableBoardSizes[i];
 	boardSize.add(opt);
     }
 
     var f = function() {
-	var size = agogo.conf.boardSizes[boardSize.selectedIndex];
+	var size = agogo.conf.game.availableBoardSizes[boardSize.selectedIndex];
 	agogo.game.boardsize = size;
 	agogo.goban.makeBoard(size);
     };
@@ -33,15 +33,15 @@ agogo.goban.initBoardSizes = function() {
 
 agogo.goban.makeBoard = function(size) {
     var canvas = document.getElementById('goban');
-    var s = agogo.conf.squareSize;
-    var m = 1.5 * s;
+    var s = agogo.conf.goban.gridSize;
+    var m = agogo.conf.goban.gridBorderWidth;
     if (canvas.getContext) {
 	var ctx = canvas.getContext('2d');
 
-	ctx.lineWidth = 2;
-	ctx.fillStyle = "black";
+	ctx.lineWidth = agogo.conf.goban.gridWidth;
+	ctx.fillStyle = agogo.conf.goban.gridColor;
 
-	ctx.font = "20px sans-serif";
+	ctx.font = agogo.conf.goban.labelFont;
 
 	canvas.width = (2 + size) * s;
 	canvas.height = (2 + size) * s;
@@ -54,8 +54,8 @@ agogo.goban.makeBoard = function(size) {
 	    ctx.lineTo(m + (s * i), m + (s * (size - 1)));
 	    ctx.stroke();
 
-	    var tm = ctx.measureText(agogo.conf.getColLabel(i + 1));
-	    ctx.fillText(agogo.conf.getColLabel(i + 1),
+	    var tm = ctx.measureText(agogo.conf.goban.getColLabel(i + 1));
+	    ctx.fillText(agogo.conf.goban.getColLabel(i + 1),
 			 m + (s * i) - Math.floor(tm.width / 2),
 			 m - s + 4);
 
@@ -65,10 +65,30 @@ agogo.goban.makeBoard = function(size) {
 	    ctx.lineTo(m + (s * (size - 1)), m + (s * i));
 	    ctx.stroke();
 
-	    tm = ctx.measureText(agogo.conf.getRowLabel(i + 1));
-	    ctx.fillText(agogo.conf.getRowLabel(i + 1),
+	    tm = ctx.measureText(agogo.conf.goban.getRowLabel(i + 1));
+	    ctx.fillText(agogo.conf.goban.getRowLabel(i + 1),
 			 m - s - Math.floor(tm.width / 2),
 			 m + (s * i) + 4);
 	}
+    }
+};
+
+agogo.goban.placeStone = function(vertex, player) {
+    var canvas = document.getElementById('goban');
+    var s = agogo.conf.goban.gridSize;
+    var m = agogo.conf.goban.gridBorderWidth;
+    if (canvas.getContext) {
+	var ctx = canvas.getContext('2d');
+
+	ctx.lineWidth = agogo.conf.goban.stoneLineWidth;
+	ctx.fillStyle = agogo.conf.goban.stoneFillColor1;
+
+	var p = agogo.conf.goban.getPosition(vertex);
+
+	ctx.beginPath();
+	ctx.arc(m + (s * (p.c - 1)), m + (s * (p.r - 1)),
+		agogo.conf.goban.stoneSize,
+		0, 2 * Math.PI);
+	ctx.fill();
     }
 };
