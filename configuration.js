@@ -41,3 +41,15 @@ agogo.conf.goban.getColLabel = function(col) {
 agogo.conf.goban.getRowLabel = function(row) {
     return agogo.game.boardsize - row + 1;
 };
+
+// Vertex/Position
+agogo.conf.goban.getVertex = function(col, row) {
+    return agogo.conf.goban.getColLabel(col) +
+	   agogo.conf.goban.getRowLabel(row);
+};
+
+agogo.conf.goban.getPosition = function(vertex) {
+    var col = agogo.conf.goban._colLabels.indexOf(vertex[0]) + 1;
+    var row = agogo.game.boardsize - parseInt(vertex.slice(1), 10) + 1;
+    return { c: col, r: row };
+};
