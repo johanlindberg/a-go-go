@@ -81,14 +81,24 @@ agogo.goban.placeStone = function(vertex, player) {
 	var ctx = canvas.getContext('2d');
 
 	ctx.lineWidth = agogo.conf.goban.stoneLineWidth;
-	ctx.fillStyle = agogo.conf.goban.stoneFillColor1;
+	ctx.fillStyle = player === 1 ?
+	    agogo.conf.goban.stoneFillColor1 : agogo.conf.goban.stoneFillColor2;
 
 	var p = agogo.conf.goban.getPosition(vertex);
 
+	// draw the stone (black or white)
 	ctx.beginPath();
 	ctx.arc(m + (s * (p.c - 1)), m + (s * (p.r - 1)),
 		agogo.conf.goban.stoneSize,
 		0, 2 * Math.PI);
 	ctx.fill();
+
+	// and the line around the stone (always black)
+	ctx.fillStyle = agogo.conf.goban.stoneLineColor;
+	ctx.beginPath();
+	ctx.arc(m + (s * (p.c - 1)), m + (s * (p.r - 1)),
+		agogo.conf.goban.stoneSize,
+		0, 2 * Math.PI);
+	ctx.stroke();
     }
 };
