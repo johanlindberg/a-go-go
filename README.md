@@ -28,8 +28,8 @@ Not much to see [here](http://johanlindberg.github.io/a-go-go/tests.html) folks.
 
 #### version 0.1
 
-- [ ] Goban
+- [x] Goban
   - [x] 9x9, 13x13 and 19x19 sizes
   - [x] Grid
-  - [ ] Handicap stone markers
-  - [ ] Ability to place stones
+  - [x] Handicap stone markers
+  - [x] Ability to place stones

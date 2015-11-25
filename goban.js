@@ -47,7 +47,8 @@ agogo.goban.makeBoard = function(size) {
 	canvas.height = (2 + size) * s;
 
 	// draw the grid
-	for (var i = 0; i < size; i++) {
+	var i;
+	for (i = 0; i < size; i++) {
 	    // cols
 	    ctx.beginPath();
 	    ctx.moveTo(m + (s * i), m);
@@ -69,6 +70,19 @@ agogo.goban.makeBoard = function(size) {
 	    ctx.fillText(agogo.conf.goban.getRowLabel(i + 1),
 			 m - s - Math.floor(tm.width / 2),
 			 m + (s * i) + 4);
+	}
+
+	// draw the star points
+	var starPoints = agogo.conf.goban.starPoints[size];
+	var p;
+	for (i = 0; i < starPoints.length; i++) {
+	    p = agogo.conf.goban.getPosition(starPoints[i]);
+
+	    ctx.beginPath();
+	    ctx.arc(m + (s * (p.c - 1)), m + (s * (p.r - 1)),
+		    agogo.conf.goban.starPointSize,
+		    0, 2 * Math.PI);
+	    ctx.fill();
 	}
     }
 };
