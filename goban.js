@@ -47,7 +47,8 @@ agogo.goban.makeBoard = function(size) {
 	canvas.height = (2 + size) * s;
 
 	// draw the grid
-	for (var i = 0; i < size; i++) {
+	var i;
+	for (i = 0; i < size; i++) {
 	    // cols
 	    ctx.beginPath();
 	    ctx.moveTo(m + (s * i), m);
@@ -70,6 +71,19 @@ agogo.goban.makeBoard = function(size) {
 			 m - s - Math.floor(tm.width / 2),
 			 m + (s * i) + 4);
 	}
+
+	// draw the star points
+	var starPoints = agogo.conf.goban.starPoints[size];
+	var p;
+	for (i = 0; i < starPoints.length; i++) {
+	    p = agogo.conf.goban.getPosition(starPoints[i]);
+
+	    ctx.beginPath();
+	    ctx.arc(m + (s * (p.c - 1)), m + (s * (p.r - 1)),
+		    agogo.conf.goban.starPointSize,
+		    0, 2 * Math.PI);
+	    ctx.fill();
+	}
     }
 };
 
@@ -81,14 +95,24 @@ agogo.goban.placeStone = function(vertex, player) {
 	var ctx = canvas.getContext('2d');
 
 	ctx.lineWidth = agogo.conf.goban.stoneLineWidth;
-	ctx.fillStyle = agogo.conf.goban.stoneFillColor1;
+	ctx.fillStyle = player === 1 ?
+	    agogo.conf.goban.stoneFillColor1 : agogo.conf.goban.stoneFillColor2;
 
 	var p = agogo.conf.goban.getPosition(vertex);
 
+	// draw the stone (black or white)
 	ctx.beginPath();
 	ctx.arc(m + (s * (p.c - 1)), m + (s * (p.r - 1)),
 		agogo.conf.goban.stoneSize,
 		0, 2 * Math.PI);
 	ctx.fill();
+
+	// and the line around the stone (always black)
+	ctx.fillStyle = agogo.conf.goban.stoneLineColor;
+	ctx.beginPath();
+	ctx.arc(m + (s * (p.c - 1)), m + (s * (p.r - 1)),
+		agogo.conf.goban.stoneSize,
+		0, 2 * Math.PI);
+	ctx.stroke();
     }
 };
