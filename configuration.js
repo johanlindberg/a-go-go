@@ -10,7 +10,7 @@ if (!agogo) {
 // -------------------
 
 agogo.conf.game.availableBoardSizes = [9, 13, 19];
-agogo.conf.game.availableHandicaps  = [2, 3, 4, 5, 6, 7, 8, 9];
+agogo.conf.game.availableHandicaps  = [0, 2, 3, 4, 5, 6, 7, 8, 9];
 agogo.conf.game.availableKomis      = [0.5, 6.5];
 agogo.conf.game.availableRules      = ['AGA (Area)',
 				       'AGA (Territory)',

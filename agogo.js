@@ -6,5 +6,6 @@ if (!agogo) {
 }
 
 agogo.init = function() {
+    agogo.game.init();
     agogo.goban.init();
 };
