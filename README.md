@@ -24,7 +24,7 @@ Not much to see [here](http://johanlindberg.github.io/a-go-go/tests.html) folks.
 - [ ] Players
   - [ ] Human
   - [ ] Random
-  - [ ] Handicap placement
+  - [x] Handicap placement
 
 #### version 0.1
 
