@@ -1,13 +1,6 @@
-// setup NS
-if (!agogo) {
-    var agogo = {conf: { game: {}, goban: {}}};
-} else {
-    agogo.conf = { game: {},
-		   goban: {}, };
-}
-
 // Game configurations
 // -------------------
+agogo.conf.game = {};
 
 agogo.conf.game.availableBoardSizes = [9, 13, 19];
 agogo.conf.game.availableHandicaps  = [0, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -16,8 +9,16 @@ agogo.conf.game.availableRules      = ['AGA (Area)',
 				       'AGA (Territory)',
 				       'Japanese'];
 
+// Player configurations
+// ---------------------
+agogo.conf.player = {};
+
+agogo.conf.player.availablePlayers = ['Human',
+				      'Random'];
+
 // Goban configurations
 // --------------------
+agogo.conf.goban = {};
 
 // Grid
 agogo.conf.goban.gridSize        = 30;

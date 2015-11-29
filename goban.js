@@ -1,22 +1,15 @@
-// setup NS
-if (!agogo) {
-    var agogo = {goban: {}};
-} else {
-    agogo.goban = {};
-}
-
 agogo.goban.init = function() {
     agogo.goban.initBoardSizes();
     var defaultSize = agogo.conf.game.availableBoardSizes[0];
     agogo.game.boardsize = defaultSize;
     agogo.goban.makeBoard(defaultSize);
 
-    agogo.goban.initHandicap();
+    agogo.game.initHandicap();
     var defaultHandicap = agogo.conf.game.availableHandicaps[0];
     agogo.game.handicap = defaultHandicap;
     agogo.game.placeHandicapStones(defaultHandicap);
 
-    agogo.goban.initNewGameButton();
+    agogo.game.initNewGameButton();
 };
 
 agogo.goban.initBoardSizes = function() {
@@ -35,33 +28,6 @@ agogo.goban.initBoardSizes = function() {
     };
 
     boardSize.onchange = f;
-};
-
-agogo.goban.initHandicap = function() {
-    var handicap = document.getElementById('handicap');
-    var opt;
-    for (var i = 0; i < agogo.conf.game.availableHandicaps.length; i++) {
-	opt = document.createElement('option');
-	opt.value = agogo.conf.game.availableHandicaps[i];
-	opt.text = agogo.conf.game.availableHandicaps[i];
-	handicap.add(opt);
-    }
-
-    var f = function() {
-	var h = agogo.conf.game.availableHandicaps[handicap.selectedIndex];
-	agogo.game.handicap = h;
-    };
-
-    handicap.onchange = f;
-};
-
-agogo.goban.initNewGameButton = function() {
-    var newGame = document.getElementById('new_game');
-    var f = function() {
-	agogo.goban.makeBoard(agogo.game.boardsize);
-	agogo.game.placeHandicapStones(agogo.game.handicap);
-    };
-    newGame.onclick = f;
 };
 
 agogo.goban.makeBoard = function(size) {

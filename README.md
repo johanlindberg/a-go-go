@@ -4,6 +4,12 @@ Not much to see [here](http://johanlindberg.github.io/a-go-go/tests.html) folks.
 
 ### Roadmap
 
+#### version 0.5
+
+- [ ] GUI
+  - [ ] Responsive design
+  - [ ] Reasonable layout
+
 #### version 0.4
 
 - [ ] Game

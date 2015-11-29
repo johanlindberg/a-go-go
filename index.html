@@ -8,11 +8,17 @@
   <script src="configuration.js"></script>
   <script src="game.js"></script>
   <script src="goban.js"></script>
+  <script src="player.js"></script>
 </head>
 <body onLoad="agogo.init();">
-  <select id="boardSize"></select><br/>
-  <select id="handicap"></select><br/>
-  <input type="button" id="new_game" value="New Game" />
+  <b>a-go-go v0.1 [2015-11-29]</b><br/>
+  <div id="box">
+    Board size: <select id="boardSize"></select><br/>
+    Handicap: <select id="handicap"></select><br/>
+    Player 1: <select id="player1"></select><br/>
+    Player 2: <select id="player2"></select><br/>
+    <input type="button" id="new_game" />
+  </div>
   <canvas id="goban"></canvas>
 </body>
 </html>
