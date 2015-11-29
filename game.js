@@ -1,5 +1,6 @@
 agogo.game.init = function() {
-    agogo.verticesPlayed = [];
+    agogo.game.verticesPlayed = [];
+    agogo.game.currentPlayer = 1;
 }
 
 agogo.game.initHandicap = function() {
@@ -25,7 +26,9 @@ agogo.game.initNewGameButton = function() {
     newGame.value = "New Game";
     var f = function() {
 	agogo.goban.makeBoard(agogo.game.boardsize);
+	agogo.game.init();
 	agogo.game.placeHandicapStones(agogo.game.handicap);
+	agogo.game.play();
     };
     newGame.onclick = f;
 };
@@ -37,10 +40,25 @@ agogo.game.setBoardSize = function(size) {
 agogo.game.placeHandicapStones = function(handicap) {
     var i;
     var handicapStones = agogo.conf.goban.handicapStones[agogo.game.boardsize][handicap];
-    if (handicapStones) {
+    if (handicapStones > 0) {
 	for (i = 0; i < handicapStones.length; i++) {
 	    agogo.goban.placeStone(handicapStones[i], 1);
-	    agogo.verticesPlayed.push(handicapStones[i]);
+	    agogo.game.verticesPlayed.push(handicapStones[i]);
 	}
+	// white starts if handicap stones are used
+	agogo.game.currentPlayer = 2;
+    }
+}
+
+agogo.game.play = function() {
+    var vertex;
+    while (agogo.game.verticesPlayed.length <
+	   agogo.game.boardsize * agogo.game.boardsize) {
+	vertex = agogo.game.player[agogo.game.currentPlayer].genmove();
+	agogo.goban.placeStone(vertex, agogo.game.currentPlayer);
+	agogo.game.verticesPlayed.push(vertex);
+
+	// next player
+	agogo.game.currentPlayer = (1 - (agogo.game.currentPlayer - 1)) + 1;
     }
 }
