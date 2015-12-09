@@ -4,6 +4,9 @@ agogo.goban.init = function() {
     agogo.game.boardsize = defaultSize;
     agogo.goban.makeBoard(defaultSize);
 
+    var canvas = document.getElementById('goban');
+    canvas.onclick = agogo.goban.handleClick;
+
     agogo.game.initHandicap();
     var defaultHandicap = agogo.conf.game.availableHandicaps[0];
     agogo.game.handicap = defaultHandicap;
@@ -114,4 +117,9 @@ agogo.goban.placeStone = function(vertex, player) {
 		0, 2 * Math.PI);
 	ctx.stroke();
     }
+};
+
+agogo.goban.handleClick = function(event) {
+    alert("sx: "+ event.screenX+ " sy: "+ event.screenY+
+	  "cx: "+ event.clientX+ " cy: "+ event.clientY);
 };

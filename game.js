@@ -54,7 +54,7 @@ agogo.game.play = function() {
     var vertex;
     while (agogo.game.verticesPlayed.length <
 	   agogo.game.boardsize * agogo.game.boardsize) {
-	vertex = agogo.game.player[agogo.game.currentPlayer].genmove();
+	vertex = agogo.game.player['player'+ agogo.game.currentPlayer].genmove();
 	agogo.goban.placeStone(vertex, agogo.game.currentPlayer);
 	agogo.game.verticesPlayed.push(vertex);
 

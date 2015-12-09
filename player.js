@@ -20,7 +20,7 @@ agogo.player.initPlayer = function(p) {
 
     var f = function() {
 	var s = agogo.conf.player.availablePlayers[player.selectedIndex];
-	agogo.game[p] = agogo.player[s]();
+	agogo.game.player[p] = agogo.player[s]();
     };
 
     player.onchange = f;
@@ -42,6 +42,6 @@ agogo.player.Random = function() {
 	    return vertex;
 	}
     };
-}
+};
 
 agogo.player.Human = agogo.player.Random;
