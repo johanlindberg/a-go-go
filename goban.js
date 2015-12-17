@@ -120,6 +120,17 @@ agogo.goban.placeStone = function(vertex, player) {
 };
 
 agogo.goban.handleClick = function(event) {
-    alert("sx: "+ event.screenX+ " sy: "+ event.screenY+
-	  "cx: "+ event.clientX+ " cy: "+ event.clientY);
+    var board = document.getElementById("goban");
+
+    var x = event.clientX + window.pageXOffset - board.offsetLeft;
+    var y = event.clientY + window.pageYOffset - board.offsetTop;
+
+    alert(x+ ":"+ y);
+
+    // calculate the closest board position
+    var r = Math.round((y - agogo.conf.goban.gridBorderWidth) /
+		       agogo.conf.goban.gridSize);
+    var c = Math.round((x - agogo.conf.goban.gridBorderWidth) /
+		       agogo.conf.goban.gridSize);
+    alert(r+ ":"+ c);
 };
